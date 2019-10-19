@@ -1,2 +1,2 @@
-A,B,C|A,B,C|A,B,C
-;(Uab)(d)
+X,A,1|X,B,2|B,C,3
+;(U(A,B),U(C,D))
