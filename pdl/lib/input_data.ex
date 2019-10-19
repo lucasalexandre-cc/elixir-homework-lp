@@ -1,10 +1,10 @@
-defmodule Input do
-  def graph do
+defmodule InputData do
+  def get_graph do
     get_graph_string()
       |> parse_graph_string
   end
 
-  def formula do
+  def get_formula do
     get_formula_string()
   end
 
@@ -20,18 +20,19 @@ defmodule Input do
       |> Enum.at(1)
   end
 
-  defp read_file do
-    file = File.read!("/home/lucas/Documents/personal_workspace/verif-frames-para-pdl-elixir/src/input.txt")
-    File.close(file)
-    file
-  end
-
   defp parse_graph_string(graph_string) do
     graph_string
       |> String.split("|")
       |> Enum.map(fn(x) -> String.split(x, ",") end)
   end
-end
 
-Input.graph()
-  |> IO.inspect
+  defp read_file do
+    file = Path.absname("assets/#{file_name()}") |> File.read!
+    File.close(file)
+    file
+  end
+
+  defp file_name do
+    System.argv()
+  end
+end
