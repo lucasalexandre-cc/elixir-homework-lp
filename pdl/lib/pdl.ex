@@ -3,7 +3,7 @@ defmodule Main do
     operator = data[:formula] |> String.at(0)
     cond do
       (operator == ";") -> Operator.execute_and(data)
-      (operator == "U") -> Operator.execute_or(data)
+      (operator == "U") -> Operator.execute_union(data)
       (operator == "*") -> IO.puts("Vou rodar o *")
       (true) -> GraphHelper.update_current_vertices(data[:graph], data[:current_vertices], data[:formula])
     end

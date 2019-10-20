@@ -14,7 +14,7 @@ defmodule Operator do
     end
   end
 
-  def execute_or(data) do
+  def execute_union(data) do
     [first_argument, second_argument] = load_arguments(data[:formula])
 
     data_01 = Map.put(data, :formula, first_argument)
