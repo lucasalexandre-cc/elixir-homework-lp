@@ -10,7 +10,7 @@ defmodule Main do
   end
 
   def parse_output(output) do
-    unless (MapSet.size(output) > 0) do
+    unless (output && length(output) > 0) do
       "Fórmula NÃO satisfaz o grafpo"
     else
       "Fórmula satisfaz o grafo"
@@ -21,7 +21,7 @@ end
 data = %{
   graph: InputData.get_graph(),
   formula: InputData.get_formula(),
-  current_vertices: MapSet.new(["0"])
+  current_vertices: ["0"]
 }
 
 Main.run(data)
