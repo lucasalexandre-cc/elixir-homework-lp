@@ -23,16 +23,15 @@ defmodule Operator do
     current_vertices_01 = Map.put(data, :formula, first_argument) |> Main.run
     current_vertices_02 = Map.put(data, :formula, second_argument) |> Main.run
 
-    failed = (Enum.with_index(current_vertices_01)
+    failed = !current_vertices_01 || !current_vertices_02 || (Enum.with_index(current_vertices_01)
                 |> Enum.map(fn x -> Tuple.to_list(x) end)
                 |> Enum.map(fn x -> Enum.at(x, 0) || Enum.at(current_vertices_02, Enum.at(x, 1))  end)
                 |> Enum.filter(fn x -> !x end)
-                |> length) > 0
-
-    current_vertices_01 = Enum.map(current_vertices_01, fn x -> x || -1 end)
-    current_vertices_02 = Enum.map(current_vertices_02, fn x -> x || -1 end)
+                |> length > 0)
 
     if(!failed) do
+      current_vertices_01 = Enum.map(current_vertices_01, fn x -> x || -1 end)
+      current_vertices_02 = Enum.map(current_vertices_02, fn x -> x || -1 end)
       current_vertices_01 ++ current_vertices_02
     else
       false
