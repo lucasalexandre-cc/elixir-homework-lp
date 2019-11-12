@@ -4,7 +4,7 @@ defmodule Main do
     cond do
       (operator == ";") -> Operator.execute_and(data)
       (operator == "U") -> Operator.execute_union(data)
-      (operator == "*") -> IO.puts("Vou rodar o *")
+      (operator == "*") -> Operator.execute_asteristico(data)
       (true) -> GraphHelper.update_current_vertices(data[:graph], data[:current_vertices], data[:formula])
     end
   end

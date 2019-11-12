@@ -23,9 +23,6 @@ defmodule Operator do
     current_vertices_01 = Map.put(data, :formula, first_argument) |> Main.run
     current_vertices_02 = Map.put(data, :formula, second_argument) |> Main.run
 
-    IO.inspect(current_vertices_01)
-    IO.inspect(current_vertices_02)
-
     failed = (Enum.with_index(current_vertices_01)
                 |> Enum.map(fn x -> Tuple.to_list(x) end)
                 |> Enum.map(fn x -> Enum.at(x, 0) || Enum.at(current_vertices_02, Enum.at(x, 1))  end)
@@ -39,6 +36,25 @@ defmodule Operator do
       current_vertices_01 ++ current_vertices_02
     else
       false
+    end
+  end
+
+  def execute_asteristico(data) do
+    log_current_vertices = data[:current_vertices]
+    log_formula = data[:formula]
+
+    argument = FormulaHelper.get_only_one_argument(data[:formula])
+    data = Map.put(data, :formula, argument)
+
+    current_vertices = Main.run(data)
+    failed = current_vertices && !Enum.reduce(current_vertices, fn x, acc -> x && acc end)
+
+    if (current_vertices && length(current_vertices) > 0 && !failed) do
+      data = Map.put(data, :current_vertices, current_vertices)
+      data = Map.put(data, :formula, log_formula)
+      Operator.execute_asteristico(data)
+    else
+      log_current_vertices
     end
   end
 

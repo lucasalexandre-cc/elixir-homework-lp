@@ -1,4 +1,10 @@
 defmodule FormulaHelper do
+  def get_only_one_argument(formula) do
+    Regex.scan(~r/(?<=\().*(?=\))/, formula)
+      |> Enum.at(0)
+      |> Enum.at(0)
+  end
+
   def get_argument_by_index(formula, argument_index) do
     Regex.scan(~r/(?<=\().*(?=\))/, formula)
       |> Enum.at(0)
